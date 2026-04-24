@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
-import { users } from "./auth.db.server";
 import { loginSchema } from "./auth.schema";
-import { loginService } from "./auth.service.server";
+import { users } from "./server/auth.db.server";
+import { loginService } from "./server/auth.service.server";
 import {
 	createSession,
 	destroySession,

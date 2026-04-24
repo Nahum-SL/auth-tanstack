@@ -8,9 +8,13 @@ export function getServiceById(id: string) {
 	return services.find((s) => s.id === id);
 }
 
-export function createService(data: Omit<Service, "id">) {
+export function createService(
+	data: Omit<Service, "id" | "ownerId">,
+	ownerId: string,
+) {
 	const newService = {
 		id: crypto.randomUUID(),
+		ownerId,
 		...data,
 	};
 

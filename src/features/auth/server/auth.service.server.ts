@@ -1,5 +1,5 @@
 // auth.service.ts
-import { findUserByEmail } from "./server/auth.db.server";
+import { findUserByEmail } from "./auth.db.server";
 
 export async function loginService(email: string, password: string) {
 	const user = findUserByEmail(email);

@@ -3,6 +3,7 @@ export type Service = {
 	name: string;
 	price: number;
 	category: string;
+	ownerId: string;
 };
 
 export const services: Service[] = [
@@ -11,5 +12,6 @@ export const services: Service[] = [
 		name: "Landing Page",
 		price: 300,
 		category: "web",
+		ownerId: "1",
 	},
 ];

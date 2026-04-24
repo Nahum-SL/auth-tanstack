@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect } from "@tanstack/react-router";
+import { redirect, useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { useAuth } from "./auth.hook";
@@ -9,6 +9,7 @@ import { type LoginFormValues, loginSchema } from "./auth.schema";
 
 export function LoginForm() {
 	const { login } = useAuth();
+	const navigate = useNavigate();
 
 	const {
 		register,
@@ -23,11 +24,14 @@ export function LoginForm() {
 	const onSubmit = async (data: LoginFormValues) => {
 		const toastId = toast.loading("Logging in...");
 		try {
-			const res = await login({ data });
-			if (res) {
-				throw redirect({
-					to: "/servicio",
-				});
+			const user = await login({ data });
+			if (user) {
+				toast.success(`Welcome back, ${user.email}`, { id: toastId });
+				if (user.role === "admin") {
+					navigate({ to: "/servicio" });
+				} else {
+					navigate({ to: "/about" });
+				}
 			}
 
 			toast.success("Login successful", { id: toastId });
